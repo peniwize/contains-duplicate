@@ -54,6 +54,21 @@ public:
     }
 
     /*
+        Time = O(n)
+        Space = O(n)
+    */
+    bool containsDuplicate_hashSet(vector<int>& nums) {
+        unordered_set<int> frequencies{};
+        for (auto const num : nums) {
+            if (frequencies.contains(num)) {
+                return true;
+            }
+            frequencies.insert(num);
+        }
+        return false;
+    }
+
+    /*
         Time = O(n*log2(n))
         Space = O(1)
     */
@@ -71,7 +86,8 @@ public:
 
     bool containsDuplicate(vector<int>& nums) {
         //return containsDuplicate_hashTable(nums);
-        return containsDuplicate_sort(nums);
+        return containsDuplicate_hashSet(nums);
+        //return containsDuplicate_sort(nums);
     }
 };
 
@@ -101,9 +117,9 @@ TEST_CASE("Case 2")
     cerr << '\n';
 }
 
-TEST_CASE("Case 2")
+TEST_CASE("Case 3")
 {
-    cerr << "Case 2" << '\n';
+    cerr << "Case 3" << '\n';
     { // New scope.
         auto nums = vector<int>{1,1,1,3,3,4,3,2,4,2};
         CHECK(Solution{}.containsDuplicate(nums));
